@@ -1,10 +1,10 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Address;
 use Faker\Generator as Faker;
 
-class AddressesTableSeeder extends Seeder
+class AddressSeeder extends Seeder
 {
     public function run(Faker $faker)
     {

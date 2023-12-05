@@ -1,10 +1,11 @@
 <?php
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 use Faker\Generator as Faker;
 
-class CategoriesTableSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     public function run(Faker $faker)
     {

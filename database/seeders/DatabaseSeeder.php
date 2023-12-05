@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             ImageSeeder::class,
             StatisticSeeder::class,
-            OrderSeeder::class,
             AddressSeeder::class,
+            OrderSeeder::class,
             CartSeeder::class,
             CartProductSeeder::class,
         ]);

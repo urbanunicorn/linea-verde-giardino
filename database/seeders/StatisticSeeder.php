@@ -1,10 +1,10 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Statistic;
 use Faker\Generator as Faker;
 
-class StatisticsTableSeeder extends Seeder
+class StatisticSeeder extends Seeder
 {
     public function run(Faker $faker)
     {

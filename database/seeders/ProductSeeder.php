@@ -1,10 +1,10 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use Faker\Generator as Faker;
 
-class ProductsTableSeeder extends Seeder
+class ProductSeeder extends Seeder
 {
     public function run(Faker $faker)
     {

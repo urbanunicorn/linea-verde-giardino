@@ -1,10 +1,10 @@
 <?php
-
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Image;
 use Faker\Generator as Faker;
 
-class ImagesTableSeeder extends Seeder
+class ImageSeeder extends Seeder
 {
     public function run(Faker $faker)
     {

@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('address_id')->constrained()->onDelete('cascade');
+            $table->dateTime('order_date');
+            $table->decimal('total_amount', 8, 2);
+            $table->boolean('is_completed')->default(false);
+            $table->string('payment_method');
             $table->timestamps();
         });
+        
     }
 
     /**

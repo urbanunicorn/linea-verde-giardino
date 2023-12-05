@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->integer('visit_count')->default(0);
             $table->timestamps();
         });
+        
     }
 
     /**

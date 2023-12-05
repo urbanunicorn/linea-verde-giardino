@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('cart_products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('cart_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->unsignedInteger('quantity');
+            $table->decimal('subtotal', 8, 2);
             $table->timestamps();
         });
+        
     }
 
     /**

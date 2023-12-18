@@ -5,8 +5,6 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-
-const hasLoggedIn = false;
 </script>
 
 <template>
@@ -27,7 +25,7 @@ const hasLoggedIn = false;
             </div>
 
             <!-- MIDDLE HEADER -->
-            <div id="middle-header" class="flex justify-between items-center">
+            <div id="middle-header" class="flex justify-around items-center">
 
                 <!-- MIDDLE - FIRST HALF -->
                 <div id="logo-container" class="basis-6/12 py-3">
@@ -35,13 +33,13 @@ const hasLoggedIn = false;
                 </div>
 
                 <!-- MIDDLE - SECOND HALF -->
-                <div class="flex justify-around items-center basis-6/12">
+                <div class="flex justify-around items-center basis-6/12 ps-16">
 
                     <!-- SEARCHBAR -->
-                    <form action="/search" class="w-[400px] w-full px-4">
+                    <form action="/search" class="w-[350px] w-full px-4">
                         <div class="relative">
                             <input type="text" name="q"
-                                class="w-full h-10 shadow p-4 rounded-full focus:border-lime-500 focus:border-2 focus:outline-none"
+                                class="w-full h-10 shadow p-4 rounded-full outline-none focus:border-lime-500 focus:border-2 focus:outline-none"
                                 placeholder="Cerca">
                             <button type="submit">
                                 <svg class="text-green-500 h-5 w-5 absolute top-2.5 right-3 fill-current"
@@ -57,7 +55,9 @@ const hasLoggedIn = false;
                     </form>
 
                     <div>
-                        <a href="#" class="font-bold text-black hover:text-green-500">Carrello</a>
+                        <a href="#"
+                            class="font-bold text-black px-5 hover:text-green-500 transition ease-in-out duration-150"><i
+                                class="material-symbols-outlined text-4xl pt-2">shopping_cart</i></a>
                     </div>
 
                     <!-- LOGIN / REGISTER -->
@@ -69,7 +69,7 @@ const hasLoggedIn = false;
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent leading-4 font-medium rounded-md text-black hover:text-green-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                                class="inline-flex items-center py-2 border border-transparent leading-4 font-medium rounded-md text-black hover:text-green-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                                 {{ $page.props.auth.user.name }}
 
                                                 <svg class="ms-1 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -93,11 +93,11 @@ const hasLoggedIn = false;
                         </div>
                     </div>
 
-                    <template v-else>
-                        <Link :href="route('login')" class="font-bold text-black hover:text-green-500">
-                        Login</Link>
+                    <template v-else class="flex justify-around">
+                        <Link :href="route('login')" class="font-bold text-black hover:text-green-500 pe-2">
+                        Accedi</Link>
 
-                        <Link :href="route('register')" class="font-bold text-black hover:text-green-500">
+                        <Link :href="route('register')" class="font-bold text-black hover:text-green-500 ps-2">
                         Registrati</Link>
                     </template>
                 </div>
@@ -105,35 +105,35 @@ const hasLoggedIn = false;
 
             <!-- LOWER HEADER -->
             <div id="lower-header" class="flex w-full px-12">
-                <ul class="flex justify-around w-full text-lg">
+                <ul class="flex justify-around w-full text-xl mb-1">
                     <li>
                         <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-b hover:border-green-500 transition ease-in-out duration-150">Interni</a>
+                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Interni</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-b hover:border-green-500 transition ease-in-out duration-150">Illuminazione</a>
+                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Illuminazione</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-b hover:border-green-500 transition ease-in-out duration-150">Esterni</a>
+                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Esterni</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-b hover:border-green-500 transition ease-in-out duration-150">A
+                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">A
                             Tavola</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-b hover:border-green-500 transition ease-in-out duration-150">Accessori</a>
+                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Accessori</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-b hover:border-green-500 transition ease-in-out duration-150">Bagni</a>
+                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Bagni</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-b hover:border-green-500 transition ease-in-out duration-150">Festivi</a>
+                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Festivi</a>
                     </li>
                 </ul>
             </div>
@@ -143,6 +143,13 @@ const hasLoggedIn = false;
 </template>
 
 <style lang="scss" scoped>
+header {
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
 #upper-header {
     img {
         height: 15px;
@@ -155,8 +162,8 @@ const hasLoggedIn = false;
 }
 
 #logo {
-    height: 120px;
-    width: 385px;
+    height: 108px;
+    width: 347px;
     object-fit: cover;
     cursor: pointer;
 }

@@ -1,3 +1,10 @@
 <template>
-    <img src="https://m.media-amazon.com/images/I/61GzDP8lJ1L.png" alt="logo">
+    <img id="app-logo" src="images/logo.svg" alt="logo">
 </template>
+
+<style>
+#app-logo {
+    height: 150px;
+    width: 450px;
+}
+</style>

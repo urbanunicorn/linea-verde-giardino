@@ -9,7 +9,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 <template>
     <header class="bg-white text-black">
-        <div class="container px-[80px]">
+        <div class="container px-[80px] mx-auto">
 
             <!-- UPPER HEADER -->
             <div id="upper-header"

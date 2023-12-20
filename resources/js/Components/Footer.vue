@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/vue3';
 
 <template>
     <footer class="text-black bg-white">
-        <div class="container px-[80px]">
+        <div class="container px-[80px] mx-auto">
             <!-- UPPER FOOTER -->
             <div id="upper-footer" class="flex flex-row w-full py-3 border-y-2 border-gray-300 mb-5">
 
@@ -88,7 +88,7 @@ import { Link } from '@inertiajs/vue3';
             </div>
         </div>
         <!-- LOWER FOOTER -->
-        <div class="container px-[80px] bg-zinc-200 pt-5">
+        <div class="container px-[80px] mx-auto bg-zinc-200 pt-5">
             <div class="flex flex-row w-full flex-wrap pb-5">
                 <div class="basis-1/4 flex flex-col items-center">
                     <ul>

@@ -33,7 +33,7 @@ defineProps({
 <template>
     <Header :canLogin="canLogin" :canRegister="canRegister" />
     <main>
-        <p class="container px-[80px] text-justify py-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        <p class="container px-[80px] mx-auto text-justify py-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Molestias
             nostrum vero,
             quaerat explicabo qui ex

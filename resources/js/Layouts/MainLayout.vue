@@ -12,26 +12,12 @@ import Footer from '@/Components/Footer.vue';
 
 const showingNavigationDropdown = ref(false);
 
-defineProps({
-    canLogin: {
-        type: Boolean = false,
-    },
-    canRegister: {
-        type: Boolean = false,
-    },
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
-});
+
+
 </script>
 
 <template>
-    <Header :canLogin="canLogin" :canRegister="canRegister" />
+    <Header />
     <main>
         <p class="container px-[80px] mx-auto text-justify py-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Molestias

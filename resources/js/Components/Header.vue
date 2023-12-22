@@ -1,10 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+
+const { categories } = defineProps(['categories']);
 </script>
 
 <template>
@@ -106,34 +109,10 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
             <!-- LOWER HEADER -->
             <div id="lower-header" class="flex w-full px-12">
                 <ul class="flex justify-around w-full text-xl mb-1">
-                    <li>
+                    <li v-for="category in categories" :key="category.id">
                         <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Interni</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Illuminazione</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Esterni</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">A
-                            Tavola</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Accessori</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Bagni</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="font-bold hover:text-green-500 hover:border-b-2 hover:border-green-500 transition ease-in-out duration-150">Festivi</a>
+                            class="font-bold py-1 hover:text-green-500 hover:border-b-4 hover:border-green-500 transition ease-in-out duration-150">{{
+                                category.name }}</a>
                     </li>
                 </ul>
             </div>

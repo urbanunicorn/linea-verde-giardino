@@ -1,19 +1,30 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Category;
-use Faker\Generator as Faker;
 
 class CategorySeeder extends Seeder
 {
-    public function run(Faker $faker)
+    public function run()
     {
-        for ($i = 0; $i < 5; $i++) {
+        $categories = [
+            'Interni',
+            'Illuminazione',
+            'Esterni',
+            'A tavola',
+            'Bagno',
+            'Accessori',
+            'Elettronica',
+            'Fai da Te',
+            'Festivi',
+        ];
+
+        foreach ($categories as $category) {
             Category::create([
-                'name' => $faker->word,
+                'name' => $category,
             ]);
         }
     }
 }
-

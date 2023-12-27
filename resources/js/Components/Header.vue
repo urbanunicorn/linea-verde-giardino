@@ -57,6 +57,7 @@ const { categories } = defineProps(['categories']);
                         </div>
                     </form>
 
+                    <!-- CART ROUTE -->
                     <div>
                         <a href="#"
                             class="font-bold text-black px-5 hover:text-green-500 transition ease-in-out duration-150"><i
@@ -104,6 +105,16 @@ const { categories } = defineProps(['categories']);
                         Registrati</Link>
                     </template>
                 </div>
+
+                <!-- ADMIN DASHBOARD -->
+                <div v-if="$page.props.auth.user">
+                    <div v-if="$page.props.auth.user.is_admin">
+                        <a href="#"
+                            class="font-bold text-black px-5 hover:text-green-500 transition ease-in-out duration-150"><i
+                                class="material-symbols-outlined text-4xl pt-2">admin_panel_settings</i></a>
+                    </div>
+                </div>
+
             </div>
 
             <!-- LOWER HEADER -->

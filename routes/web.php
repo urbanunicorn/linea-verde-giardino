@@ -22,7 +22,11 @@ use App\Http\Controllers\ProductController;
 Route::inertia('/', 'Homepage/HomePage')->name('home')->uses(HomeController::class);
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    if (auth()->user()->is_admin) {
+        return Inertia::render('Dashboard');
+    } else {
+        abort(403, 'Unauthorized action.');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

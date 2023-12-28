@@ -1,9 +1,11 @@
 <script setup>
-import { ref, onBeforeMount } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
+import { computed } from "vue";
 
 const product = ref({
-    subcategory_id: "",
+    subcategory_id: "0",
+    category_id: "0",
     title: "",
     description: "",
     price: "",
@@ -20,13 +22,18 @@ const product = ref({
 const images = ref([]);
 const serverErrors = ref({});
 const successMessage = ref("");
-let subcategories = ref([]);
-
-onBeforeMount(() => {
-    axios.get("/api/subcategory").then((response) => {
-        subcategories = response.data;
-    });
+const props = defineProps({
+    'categories': Array,
+    'subcategories': Array,
 });
+
+
+const filteredSubcategories = computed(() => {
+    const category_input = product["_value"].category_id;
+    return props.subcategories.filter((sub) => sub.category_id === category_input);
+});
+
+
 
 function handleImageUpload(event) {
     images.value = event.target.files;
@@ -99,209 +106,130 @@ async function handleSubmit() {
                         Enter details about the product.
                     </p>
 
-                    <div
-                        class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
-                    >
+                    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <!-- Title -->
                         <div class="sm:col-span-full">
-                            <label
-                                for="title"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Title</label
-                            >
-                            <input
-                                type="text"
-                                id="title"
-                                v-model="product.title"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
+                            <label for="title" class="block text-sm font-medium leading-6 text-gray-900">Title</label>
+                            <input type="text" id="title" v-model="product.title"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                        </div>
+
+
+                        <!-- Category ID -->
+                        <div class="sm:col-span-full">
+                            <label for="category" class="block text-sm font-medium leading-6 text-gray-900">Category</label>
+                            <select id="category" v-model="product.category_id"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option selected value="0">
+                                    ----------------
+                                </option>
+                                <option v-for="category in categories" :value="category.id" :key="category.id"
+                                    id="category_input" v-text="category.name">
+                                </option>
+                            </select>
                         </div>
 
                         <!-- Subcategory ID -->
                         <div class="sm:col-span-full">
-                            <label
-                                for="subcategory"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Subcategory</label
-                            >
-                            <select
-                                id="subcategory"
-                                v-model="product.subcategory_id"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            >
-                                <option
-                                    v-for="subcategory in subcategories"
-                                    :value="subcategory.id"
-                                    :key="subcategory.id"
-                                >
-                                    {{ subcategory.name }}
+                            <label for="subcategory"
+                                class="block text-sm font-medium leading-6 text-gray-900">Subcategory</label>
+                            <select id="subcategory" v-model="product.subcategory_id"
+                                :disabled="filteredSubcategories.length === 0"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option selected value="0">
+                                    ----------------
+                                </option>
+                                <option v-for="subcategory in filteredSubcategories " :value="subcategory.id"
+                                    v-text="subcategory.name">
                                 </option>
                             </select>
                         </div>
 
                         <!-- Description -->
                         <div class="sm:col-span-full">
-                            <label
-                                for="description"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Description</label
-                            >
-                            <textarea
-                                id="description"
-                                v-model="product.description"
+                            <label for="description"
+                                class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+                            <textarea id="description" v-model="product.description"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                rows="3"
-                            ></textarea>
+                                rows="3"></textarea>
                         </div>
 
                         <!-- Price -->
                         <div class="sm:col-span-2">
-                            <label
-                                for="price"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Price</label
-                            >
-                            <input
-                                type="number"
-                                id="price"
-                                v-model="product.price"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
+                            <label for="price" class="block text-sm font-medium leading-6 text-gray-900">Price</label>
+                            <input type="number" id="price" v-model="product.price"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                         <!-- Dimension -->
                         <div class="sm:col-span-2">
-                            <label
-                                for="dimension"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Dimension</label
-                            >
-                            <input
-                                type="text"
-                                id="dimension"
-                                v-model="product.dimension"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
+                            <label for="dimension"
+                                class="block text-sm font-medium leading-6 text-gray-900">Dimension</label>
+                            <input type="text" id="dimension" v-model="product.dimension"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
 
                         <!-- Weight -->
                         <div class="sm:col-span-2">
-                            <label
-                                for="weight"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Weight</label
-                            >
-                            <input
-                                type="text"
-                                id="weight"
-                                v-model="product.weight"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
+                            <label for="weight" class="block text-sm font-medium leading-6 text-gray-900">Weight</label>
+                            <input type="text" id="weight" v-model="product.weight"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
 
                         <!-- Is On Sale -->
                         <div class="sm:col-span-full">
-                            <label
-                                for="is-on-sale"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Is On Sale</label
-                            >
-                            <input
-                                type="checkbox"
-                                id="is-on-sale"
-                                v-model="product.is_on_sale"
-                                class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                            />
+                            <label for="is-on-sale" class="block text-sm font-medium leading-6 text-gray-900">Is On
+                                Sale</label>
+                            <input type="checkbox" id="is-on-sale" v-model="product.is_on_sale"
+                                class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
                         </div>
 
                         <!-- Discount -->
                         <div class="sm:col-span-2">
-                            <label
-                                for="discount"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Discount</label
-                            >
-                            <input
-                                type="text"
-                                id="discount"
-                                v-model="product.discount"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
+                            <label for="discount" class="block text-sm font-medium leading-6 text-gray-900">Discount</label>
+                            <input type="text" id="discount" v-model="product.discount"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
 
                         <!-- Sale Start Date -->
                         <div class="sm:col-span-2">
-                            <label
-                                for="sale-start-date"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Sale Start Date</label
-                            >
-                            <input
-                                type="date"
-                                id="sale-start-date"
-                                v-model="product.sale_start_date"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
+                            <label for="sale-start-date" class="block text-sm font-medium leading-6 text-gray-900">Sale
+                                Start Date</label>
+                            <input type="date" id="sale-start-date" v-model="product.sale_start_date"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
 
                         <!-- Sale End Date -->
                         <div class="sm:col-span-2">
-                            <label
-                                for="sale-end-date"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Sale End Date</label
-                            >
-                            <input
-                                type="date"
-                                id="sale-end-date"
-                                v-model="product.sale_end_date"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
+                            <label for="sale-end-date" class="block text-sm font-medium leading-6 text-gray-900">Sale End
+                                Date</label>
+                            <input type="date" id="sale-end-date" v-model="product.sale_end_date"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
 
                         <!-- Is Visible -->
                         <div class="sm:col-span-full">
-                            <label
-                                for="is-visible"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Is Visible</label
-                            >
-                            <input
-                                type="checkbox"
-                                id="is-visible"
-                                v-model="product.is_visible"
-                                class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
-                            />
+                            <label for="is-visible" class="block text-sm font-medium leading-6 text-gray-900">Is
+                                Visible</label>
+                            <input type="checkbox" id="is-visible" v-model="product.is_visible"
+                                class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
                         </div>
                         <!-- Image Upload Section -->
                         <div class="col-span-full">
-                            <label
-                                for="images"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Product Images</label
-                            >
-                            <input
-                                type="file"
-                                id="images"
-                                multiple
-                                @change="handleImageUpload"
-                                class="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-indigo-700 hover:file:bg-indigo-50"
-                            />
+                            <label for="images" class="block text-sm font-medium leading-6 text-gray-900">Product
+                                Images</label>
+                            <input type="file" id="images" multiple @change="handleImageUpload"
+                                class="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-white file:text-indigo-700 hover:file:bg-indigo-50" />
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="my-6 flex items-center justify-end gap-x-6">
-                <button
-                    type="button"
-                    class="text-sm font-semibold leading-6 text-gray-900"
-                >
+                <button type="button" class="text-sm font-semibold leading-6 text-gray-900">
                     Cancel
                 </button>
-                <button
-                    type="submit"
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
+                <button type="submit"
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Save
                 </button>
             </div>

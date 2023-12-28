@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onBeforeMount } from "vue";
 import axios from "axios";
 
 const product = ref({
@@ -20,15 +20,12 @@ const product = ref({
 const images = ref([]);
 const serverErrors = ref({});
 const successMessage = ref("");
+let subcategories = ref([]);
 
-onMounted(async () => {
-    try {
-        const response = await axios.get("/api/subcategories");
-        subcategories.value = response.data;
-    } catch (error) {
-        console.error("Error fetching subcategories:", error);
-        // Handle error appropriately
-    }
+onBeforeMount(() => {
+    axios.get("/api/subcategory").then((response) => {
+        subcategories = response.data;
+    });
 });
 
 function handleImageUpload(event) {

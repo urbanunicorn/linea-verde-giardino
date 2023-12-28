@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 
 const product = ref({
@@ -20,6 +20,16 @@ const product = ref({
 const images = ref([]);
 const serverErrors = ref({});
 const successMessage = ref("");
+
+onMounted(async () => {
+    try {
+        const response = await axios.get("/api/subcategories");
+        subcategories.value = response.data;
+    } catch (error) {
+        console.error("Error fetching subcategories:", error);
+        // Handle error appropriately
+    }
+});
 
 function handleImageUpload(event) {
     images.value = event.target.files;
@@ -95,21 +105,6 @@ async function handleSubmit() {
                     <div
                         class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
                     >
-                        <!-- Subcategory ID -->
-                        <div class="sm:col-span-full">
-                            <label
-                                for="subcategory-id"
-                                class="block text-sm font-medium leading-6 text-gray-900"
-                                >Subcategory ID</label
-                            >
-                            <input
-                                type="number"
-                                id="subcategory-id"
-                                v-model="product.subcategory_id"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                        </div>
-
                         <!-- Title -->
                         <div class="sm:col-span-full">
                             <label
@@ -123,6 +118,28 @@ async function handleSubmit() {
                                 v-model="product.title"
                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
+                        </div>
+
+                        <!-- Subcategory ID -->
+                        <div class="sm:col-span-full">
+                            <label
+                                for="subcategory"
+                                class="block text-sm font-medium leading-6 text-gray-900"
+                                >Subcategory</label
+                            >
+                            <select
+                                id="subcategory"
+                                v-model="product.subcategory_id"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            >
+                                <option
+                                    v-for="subcategory in subcategories"
+                                    :value="subcategory.id"
+                                    :key="subcategory.id"
+                                >
+                                    {{ subcategory.name }}
+                                </option>
+                            </select>
                         </div>
 
                         <!-- Description -->
@@ -141,7 +158,7 @@ async function handleSubmit() {
                         </div>
 
                         <!-- Price -->
-                        <div class="sm:col-span-full">
+                        <div class="sm:col-span-2">
                             <label
                                 for="price"
                                 class="block text-sm font-medium leading-6 text-gray-900"
@@ -155,7 +172,7 @@ async function handleSubmit() {
                             />
                         </div>
                         <!-- Dimension -->
-                        <div class="sm:col-span-full">
+                        <div class="sm:col-span-2">
                             <label
                                 for="dimension"
                                 class="block text-sm font-medium leading-6 text-gray-900"
@@ -170,7 +187,7 @@ async function handleSubmit() {
                         </div>
 
                         <!-- Weight -->
-                        <div class="sm:col-span-full">
+                        <div class="sm:col-span-2">
                             <label
                                 for="weight"
                                 class="block text-sm font-medium leading-6 text-gray-900"
@@ -200,7 +217,7 @@ async function handleSubmit() {
                         </div>
 
                         <!-- Discount -->
-                        <div class="sm:col-span-full">
+                        <div class="sm:col-span-2">
                             <label
                                 for="discount"
                                 class="block text-sm font-medium leading-6 text-gray-900"
@@ -215,7 +232,7 @@ async function handleSubmit() {
                         </div>
 
                         <!-- Sale Start Date -->
-                        <div class="sm:col-span-full">
+                        <div class="sm:col-span-2">
                             <label
                                 for="sale-start-date"
                                 class="block text-sm font-medium leading-6 text-gray-900"
@@ -230,7 +247,7 @@ async function handleSubmit() {
                         </div>
 
                         <!-- Sale End Date -->
-                        <div class="sm:col-span-full">
+                        <div class="sm:col-span-2">
                             <label
                                 for="sale-end-date"
                                 class="block text-sm font-medium leading-6 text-gray-900"

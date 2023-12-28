@@ -6,8 +6,29 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import axios from 'axios';
+import { onMounted } from 'vue';
 
 const { categories } = defineProps(['categories']);
+let subcategories = ref();
+let subcategoryArray = [];
+
+onMounted(() => {
+    axios.get(`http://127.0.0.1:8000/api/subcategory`).then((res) => {
+        subcategories = res.data;
+    });
+})
+
+const fetchSubcategories = (id) => {
+    subcategoryArray = [];
+    subcategories.forEach(subcategory => {
+        if (subcategory["category_id"] == id) {
+            subcategoryArray.push(subcategory);
+        }
+    });
+};
+
 </script>
 
 <template>
@@ -121,13 +142,38 @@ const { categories } = defineProps(['categories']);
             <div id="lower-header" class="flex w-full px-12">
                 <ul class="flex justify-around w-full text-xl mb-1">
                     <li v-for="category in categories" :key="category.id">
-                        <a href="#"
+                        <!-- <a href="#"
                             class="font-bold py-1 hover:text-green-500 hover:border-b-4 hover:border-green-500 transition ease-in-out duration-150">{{
-                                category.name }}</a>
+                                category.name }}</a> -->
+                        <Menu as="div" class="relative inline-block text-left">
+                            <div>
+                                <MenuButton @click="fetchSubcategories(category.id)"
+                                    class="font-bold py-1 hover:text-green-500 border-b-4 hover:border-b-4 border-transparent hover:border-green-500 transition ease-in-out duration-150">
+                                    {{ category.name }}
+                                </MenuButton>
+                            </div>
+
+                            <transition enter-active-class="transition ease-out duration-100"
+                                enter-from-class="transform opacity-0 scale-95"
+                                enter-to-class="transform opacity-100 scale-100"
+                                leave-active-class="transition ease-in duration-75"
+                                leave-from-class="transform opacity-100 scale-100"
+                                leave-to-class="transform opacity-0 scale-95">
+                                <MenuItems
+                                    class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <div class="py-1">
+                                        <MenuItem v-slot="{ active }" v-for="subcat in subcategoryArray">
+                                        <a href="#"
+                                            :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">{{
+                                                subcat.name }}</a>
+                                        </MenuItem>
+                                    </div>
+                                </MenuItems>
+                            </transition>
+                        </Menu>
                     </li>
                 </ul>
             </div>
-
         </div>
     </header>
 </template>

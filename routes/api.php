@@ -32,9 +32,9 @@ Route::get("/categories", function () {
 
 // API per ricevere tutte le sottocategorie di una categoria
 
-Route::get("/categories/{category}", function (string $id) {
+Route::get("/subcategory", function () {
 
-    $subcategories = Subcategory::where("category_id", $id)->get();
+    $subcategories = Subcategory::all();
 
     return response()->json($subcategories);
 });

@@ -10,7 +10,7 @@ const { products } = defineProps(['products']);
         <slot>
             <main class="container px-[80px] mx-auto">
                 <div class="container mx-auto flex justify-end">
-                    <a href="#"
+                    <a :href="route('products.create')"
                         class=" flex justify-center items-center group h-12 w-48 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white right-0">
                         Nuovo Prodotto
                     </a>

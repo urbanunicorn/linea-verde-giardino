@@ -1,14 +1,13 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import MainLayout from '@/Layouts/MainLayout.vue';
-import Header from '@/Components/Header.vue';
-import Footer from '@/Components/Footer.vue';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
 const { products } = defineProps(['products']);
 </script>
 
 <template>
     <Head title="Prodotti" />
-    <Header />
+    <AdminLayout>
+    </AdminLayout>
     <main>
         <div class="container mx-auto flex justify-end">
             <a href="#"
@@ -132,7 +131,6 @@ const { products } = defineProps(['products']);
             </div>
         </div>
     </main>
-    <Footer />
 </template>
 
 <style></style>

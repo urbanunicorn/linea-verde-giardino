@@ -10,8 +10,17 @@ const { products } = defineProps(['products']);
     <Head title="Prodotti" />
     <Header />
     <main>
-        <!-- component -->
+        <div class="container mx-auto flex justify-end">
+            <a href="#"
+                class=" flex justify-center items-center group relative h-12 w-48 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white right-0">
+                Nuovo Prodotto
+                <div
+                    class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30">
+                </div>
+            </a>
+        </div>
         <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 container mx-auto">
+
             <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
                 <thead class="bg-gray-50">
                     <tr>
@@ -115,7 +124,7 @@ const { products } = defineProps(['products']);
         </div>
 
         <!-- Paginate -->
-        <div class="container mx-auto mb-10">
+        <div class="container mx-auto mb-20 flex justify-end">
             <div class="flex select-none space-x-1 text-gray-700 ">
                 <a :href="products.prev_page_url"
                     class="rounded-md bg-gray-200 px-4 py-2 transition duration-300 hover:bg-gray-400 ">

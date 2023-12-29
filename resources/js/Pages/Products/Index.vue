@@ -12,7 +12,7 @@ const { products } = defineProps(['products']);
     <main>
         <div class="container mx-auto flex justify-end">
             <a href="#"
-                class=" flex justify-center items-center group relative h-12 w-48 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white right-0">
+                class=" flex justify-center items-center group h-12 w-48 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white right-0">
                 Nuovo Prodotto
                 <div
                     class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30">
@@ -37,7 +37,7 @@ const { products } = defineProps(['products']);
                     <tr v-for="product in products.data" class="hover:bg-gray-50">
                         <!-- Product -->
                         <th class="flex gap-3 px-6 py-4 font-normal text-gray-900">
-                            <div class="relative h-10 w-10">
+                            <div class=" h-10 w-10">
 
                                 <!-- Product Image -->
                                 <img class="h-full w-full rounded-full object-cover object-center"

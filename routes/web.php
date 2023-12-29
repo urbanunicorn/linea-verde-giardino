@@ -19,11 +19,11 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::inertia('/', 'Homepage/HomePage')->name('home')->uses(HomeController::class);
+Route::inertia('/', 'homepage/homepage')->name('home')->uses(HomeController::class);
 
-Route::get('/dashboard', function () {
+Route::get('admin/dashboard', function () {
     if (auth()->user()->is_admin) {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Admin/Dashboard');
     } else {
         abort(403, 'Unauthorized action.');
     }

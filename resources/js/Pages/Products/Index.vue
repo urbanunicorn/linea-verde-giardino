@@ -8,7 +8,7 @@ const { products } = defineProps(['products']);
     <Head title="Prodotti" />
     <AdminLayout>
     </AdminLayout>
-    <main>
+    <main class="container px-[80px] mx-auto">
         <div class="container mx-auto flex justify-end">
             <a href="#"
                 class=" flex justify-center items-center group h-12 w-48 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white right-0">

@@ -10,8 +10,6 @@ import { Link } from '@inertiajs/vue3';
 
 import ControlPanel_Header from '@/Components/ControlPanel_Header.vue';
 
-const showingNavigationDropdown = ref(false);
-
 </script>
 
 <template>

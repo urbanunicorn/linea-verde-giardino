@@ -10,6 +10,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import axios from 'axios';
 import { onMounted } from 'vue';
 
+const showingNavigationDropdown = ref(false);
 </script>
 
 <template>

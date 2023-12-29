@@ -14,9 +14,6 @@ const { products } = defineProps(['products']);
             <a href="#"
                 class=" flex justify-center items-center group h-12 w-48 overflow-hidden rounded-2xl bg-green-500 text-lg font-bold text-white right-0">
                 Nuovo Prodotto
-                <div
-                    class="absolute inset-0 h-full w-full scale-0 rounded-2xl transition-all duration-300 group-hover:scale-100 group-hover:bg-white/30">
-                </div>
             </a>
         </div>
         <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 container mx-auto">

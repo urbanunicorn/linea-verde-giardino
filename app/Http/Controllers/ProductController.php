@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Product;
+use App\Models\Subcategory;
 
 class ProductController extends Controller
 {
     public function index()
     {
+
+        $products = Product::with("images")->paginate(5);
         return Inertia::render('Products/Index', [
-            'products' => Product::all(),
+            'products' => $products,
         ]);
     }
     // /products/create
     public function create()
     {
-        return Inertia::render('Products/Create');
+        $categories = Category::all();
+        $subcategories = Subcategory::all();
+        return Inertia::render('Products/Create', ["categories" => $categories, "subcategories" => $subcategories]);
     }
 
     public function store(Request $request)

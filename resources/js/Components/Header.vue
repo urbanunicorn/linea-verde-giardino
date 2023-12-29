@@ -130,7 +130,7 @@ const fetchSubcategories = (id) => {
                 <!-- ADMIN DASHBOARD -->
                 <div v-if="$page.props.auth.user">
                     <div v-if="$page.props.auth.user.is_admin">
-                        <a :href="route('dashboard')"
+                        <a :href="route('products.index')"
                             class="font-bold text-black px-5 hover:text-green-500 transition ease-in-out duration-150"><i
                                 class="material-symbols-outlined text-4xl pt-2">admin_panel_settings</i></a>
                     </div>

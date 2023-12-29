@@ -39,8 +39,7 @@ const { products } = defineProps(['products']);
                                 <!-- Product Image -->
                                 <img class="h-full w-full rounded-full object-cover object-center"
                                     :src="product.images[0].image_path" alt="" />
-                                <span
-                                    class="absolute right-0 bottom-0 h-2 w-2 rounded-full bg-green-400 ring ring-white"></span>
+
                             </div>
 
                             <!-- Product Name -->

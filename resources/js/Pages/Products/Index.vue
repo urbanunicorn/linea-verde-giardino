@@ -15,8 +15,7 @@ const { products } = defineProps(['products']);
                         Nuovo Prodotto
                     </a>
                 </div>
-                <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 container mx-auto">
-
+                <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 container mx-auto ">
                     <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
                         <thead class="bg-gray-50">
                             <tr>

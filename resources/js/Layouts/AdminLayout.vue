@@ -13,10 +13,13 @@ import ControlPanel_Footer from '@/Components/ControlPanel_Footer.vue';
 
 </script>
 
-<template>
-    <ControlPanel_Header></ControlPanel_Header>
+<template >
+    <body class="h-screen flex flex-col ">
 
-    <slot></slot>
+        <ControlPanel_Header></ControlPanel_Header>
 
-    <ControlPanel_Footer></ControlPanel_Footer>
+        <slot></slot>
+
+        <ControlPanel_Footer class="grow flex items-end"></ControlPanel_Footer>
+    </body>
 </template>

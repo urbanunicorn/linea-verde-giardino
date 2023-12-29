@@ -15,8 +15,8 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="bg-gray-100 py-3 border-b border-gray-500 mb-5 container px-[40px] mx-auto">
-            <nav class="border-b border-gray-100">
+        <div class="bg-gray-100 py-3 border-b border-gray-500 mb-5">
+            <nav class="border-b border-gray-100  container mx-auto">
                 <!-- Primary Navigation Menu -->
                 <div class="mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">

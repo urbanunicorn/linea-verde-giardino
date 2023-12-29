@@ -9,9 +9,14 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
 import ControlPanel_Header from '@/Components/ControlPanel_Header.vue';
+import ControlPanel_Footer from '@/Components/ControlPanel_Footer.vue';
 
 </script>
 
 <template>
     <ControlPanel_Header></ControlPanel_Header>
+
+    <slot></slot>
+
+    <ControlPanel_Footer></ControlPanel_Footer>
 </template>
